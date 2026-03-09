@@ -1,21 +1,105 @@
-<footer class="site-footer">
-  <div class="site-footer__inner">
-    {%- if section.settings.menu != blank -%}
-      <nav class="site-footer__nav" aria-label="Footer navigation">
-        {%- for link in linklists[section.settings.menu].links -%}
-          <a href="{{ link.url }}" class="site-footer__nav-link">{{ link.title }}</a>
-        {%- endfor -%}
-      </nav>
-    {%- endif -%}
+<footer class="bg-primary-500 w-full">
+  <div class="flex justify-between px-16 py-[100px]">
 
-    {%- if section.settings.footer_text != blank -%}
-      <div class="site-footer__text rte">
-        {{ section.settings.footer_text }}
+    <!-- Left: logo + newsletter + social -->
+    <div class="flex flex-col gap-6 w-[340px]">
+      <!-- Logo (white) -->
+      {%- if section.settings.logo != blank -%}
+        <img
+          src="{{ section.settings.logo | image_url: width: 200 }}"
+          alt="{{ shop.name }}"
+          class="h-[51px] w-[160px] object-contain brightness-0 invert"
+        >
+      {%- else -%}
+        <span class="font-sans font-bold text-2xl text-white">{{ shop.name }}</span>
+      {%- endif -%}
+
+      <h4 class="font-serif text-2xl leading-relaxed text-white">Get the latest and tastiest</h4>
+
+      <!-- Email signup -->
+      <form action="/contact#contact_form" method="post" class="flex items-center justify-between border border-[rgba(255,255,255,0.15)] rounded-card px-5 py-3.5 h-[60px]">
+        <input
+          type="email"
+          name="contact[email]"
+          placeholder="Email Address"
+          class="bg-transparent font-sans text-lg text-[rgba(255,255,255,0.6)] placeholder-[rgba(255,255,255,0.4)] outline-none flex-1"
+          aria-label="Email address"
+        >
+        <button type="submit" class="w-8 h-8 shrink-0 text-white" aria-label="Subscribe">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="white" stroke-width="1.5" aria-hidden="true">
+            <path d="M6 16h20M19 9l7 7-7 7"/>
+          </svg>
+        </button>
+      </form>
+
+      <p class="font-sans text-sm leading-relaxed text-white">Fresh updates on product launches, farm events, and so much more.</p>
+
+      <!-- Social icons -->
+      <div class="flex gap-4 mt-2">
+        {%- if section.settings.instagram_url != blank -%}
+          <a href="{{ section.settings.instagram_url }}" class="w-5 h-5 opacity-80 hover:opacity-100 transition-opacity" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.facebook_url != blank -%}
+          <a href="{{ section.settings.facebook_url }}" class="w-5 h-5 opacity-80 hover:opacity-100 transition-opacity" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.youtube_url != blank -%}
+          <a href="{{ section.settings.youtube_url }}" class="w-5 h-5 opacity-80 hover:opacity-100 transition-opacity" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        {%- endif -%}
       </div>
-    {%- endif -%}
+    </div>
 
-    <p class="site-footer__copyright">
-      &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}
+    <!-- Center: nav links (two columns) -->
+    <div class="flex gap-16">
+      <div class="flex flex-col gap-2.5">
+        <a href="/collections" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Products</a>
+        <a href="/pages/about" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">About Us</a>
+        <a href="/blogs/recipes" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Recipes</a>
+        <a href="/blogs/stories" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Stories</a>
+        <a href="/pages/find-in-store" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Find in Store</a>
+        <a href="/pages/contact" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Contact</a>
+        <a href="/pages/sell" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Sell</a>
+      </div>
+      <div class="flex flex-col gap-2.5">
+        <a href="/pages/careers" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Join Us</a>
+        <a href="/pages/leadership" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Leadership</a>
+        <a href="/policies/terms-of-service" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Terms of Services</a>
+        <a href="/policies/privacy-policy" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Privacy Policy</a>
+        <a href="/pages/support" class="font-sans text-xl leading-relaxed text-white hover:text-primary-100 transition-colors">Support</a>
+      </div>
+    </div>
+
+    <!-- Right: location -->
+    <div class="flex flex-col gap-3">
+      <p class="font-sans text-xl leading-relaxed text-white">Location</p>
+      <p class="font-sans text-base leading-relaxed text-[rgba(255,255,255,0.75)]">
+        {%- if section.settings.address != blank -%}
+          {{ section.settings.address | newline_to_br }}
+        {%- else -%}
+          151 W 26th St<br>12th Floor, New York<br>NY 10001
+        {%- endif -%}
+      </p>
+      {%- if section.settings.maps_url != blank -%}
+        <a href="{{ section.settings.maps_url }}" class="font-sans text-base text-white hover:text-primary-100 transition-colors flex items-center gap-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          View Location
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-[rgba(255,255,255,0.2)] flex items-center px-16 py-5">
+    <p class="font-sans text-sm leading-relaxed text-white flex-1">
+      &copy; {{ 'now' | date: '%Y' }}, Elevate Consumer India
     </p>
   </div>
 </footer>
@@ -26,15 +110,39 @@
   "class": "section-footer",
   "settings": [
     {
-      "type": "link_list",
-      "id": "menu",
-      "default": "footer",
-      "label": "Navigation menu"
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (shown in white)"
     },
     {
-      "type": "richtext",
-      "id": "footer_text",
-      "label": "Footer text"
+      "type": "textarea",
+      "id": "address",
+      "label": "Location address",
+      "default": "151 W 26th St\n12th Floor, New York\nNY 10001"
+    },
+    {
+      "type": "url",
+      "id": "maps_url",
+      "label": "Google Maps URL"
+    },
+    {
+      "type": "header",
+      "content": "Social links"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
     }
   ]
 }

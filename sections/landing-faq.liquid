@@ -1,0 +1,100 @@
+{% comment %}
+  landing-faq.liquid
+  FAQ accordion section with blue background.
+  Interactive expand/collapse powered by inline JS.
+{% endcomment %}
+
+<section class="bg-blue-light w-full px-16 py-[100px]">
+  <div class="flex gap-[120px] items-start max-w-[1312px] mx-auto">
+
+    <!-- Left: headline -->
+    <div class="flex flex-col gap-3 shrink-0 w-[320px]">
+      <h2 class="font-serif font-semibold text-[40px] leading-snug text-[#121212]">
+        We&rsquo;re Serious About<br>Facts. Ask Away.
+      </h2>
+      <p class="font-sans text-lg leading-relaxed text-[#121212]">Can&rsquo;t find an answer to your question?</p>
+      <a href="/pages/contact" class="font-sans text-base text-[#121212] underline uppercase text-left hover:text-primary-500 transition-colors">
+        Get In Touch
+      </a>
+    </div>
+
+    <!-- Right: accordion -->
+    <div class="flex flex-col flex-1" id="faq-accordion">
+
+      {%- assign faqs = "How is this different from regular multivitamins?|Move Easy is a targeted joint support formula, not a general multivitamin. It combines Aflapin® Boswellia (a clinically proven anti-inflammatory), Calcium + D3 + K2-7 for bone density, and Magnesium for muscle recovery — working as a complete joint system rather than a broad-spectrum supplement.||When should I expect results?|Clinical studies show statistically significant reductions in joint pain and stiffness within 7 days. Meaningful reductions in pain scores occur within 1 month, with measurable improvements in joint structure continuing at 6 months of consistent use.||Can I take this with other supplements?|Yes, Move Easy is formulated to be taken alongside other supplements. However, if you are on prescription medications — particularly blood thinners or corticosteroids — consult your doctor before starting.||When should I consume it?|Take 1–2 sachets daily after a meal or light snack. Pour the mouth-melting powder directly on your tongue and let it dissolve. No water required.||Is it safe for long-term use?|Yes. Move Easy uses clinically studied ingredients at validated doses. It is zero sugar, zero artificial sweeteners, and free from common allergens — making it safe for long-term daily use, including for diabetics." | split: "||" -%}
+
+      {%- for faq in faqs -%}
+        {%- assign parts = faq | split: "|" -%}
+        {%- assign q = parts[0] -%}
+        {%- assign a = parts[1] -%}
+        <div class="faq-item border-b border-[#d1d5db]">
+          <button
+            class="faq-trigger w-full flex items-center justify-between py-5 text-left"
+            aria-expanded="false"
+          >
+            <p class="font-serif font-semibold text-xl leading-relaxed text-[#121212] flex-1 pr-4">{{ q }}</p>
+            <span class="faq-icon w-8 h-8 shrink-0 flex items-center justify-center text-primary-500">
+              <!-- Plus icon -->
+              <svg class="icon-plus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b61bb" stroke-width="2" aria-hidden="true">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+              <!-- Minus icon (hidden by default) -->
+              <svg class="icon-minus hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b61bb" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer hidden pb-5">
+            <p class="font-sans text-base leading-relaxed text-[#121212]">{{ a }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var triggers = document.querySelectorAll('.faq-trigger');
+    triggers.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item    = btn.closest('.faq-item');
+        var answer  = item.querySelector('.faq-answer');
+        var plus    = item.querySelector('.icon-plus');
+        var minus   = item.querySelector('.icon-minus');
+        var isOpen  = !answer.classList.contains('hidden');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(function (el) {
+          el.querySelector('.faq-answer').classList.add('hidden');
+          el.querySelector('.icon-plus').classList.remove('hidden');
+          el.querySelector('.icon-minus').classList.add('hidden');
+          el.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open this one if it was closed
+        if (!isOpen) {
+          answer.classList.remove('hidden');
+          plus.classList.add('hidden');
+          minus.classList.remove('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "section-landing-faq",
+  "settings": [],
+  "presets": [
+    {
+      "name": "FAQ"
+    }
+  ]
+}
+{% endschema %}
