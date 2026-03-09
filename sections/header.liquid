@@ -1,36 +1,25 @@
-<header class="site-header">
-  <div class="site-header__inner">
-    <a href="{{ routes.root_url }}" class="site-header__logo">
-      {%- if section.settings.logo != blank -%}
-        <img
-          src="{{ section.settings.logo | image_url: width: 200 }}"
-          alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
-          width="{{ section.settings.logo.width }}"
-          height="{{ section.settings.logo.height }}"
-          loading="eager"
-        >
-      {%- else -%}
-        <span>{{ shop.name }}</span>
-      {%- endif -%}
-    </a>
-
-    {%- if section.settings.menu != blank -%}
-      <nav class="site-header__nav" aria-label="Main navigation">
-        {%- for link in linklists[section.settings.menu].links -%}
-          <a href="{{ link.url }}" class="site-header__nav-link"
-            {%- if link.active %} aria-current="page"{% endif -%}>
-            {{ link.title }}
-          </a>
-        {%- endfor -%}
-      </nav>
+<header class="bg-beige-500 h-20 flex items-center justify-between px-16 sticky top-0 z-50 w-full">
+  <!-- Logo -->
+  <a href="{{ routes.root_url }}" class="flex items-center">
+    {%- if section.settings.logo != blank -%}
+      <img
+        src="{{ section.settings.logo | image_url: width: 220 }}"
+        alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+        class="h-11 w-auto object-contain"
+        loading="eager"
+      >
+    {%- else -%}
+      <span class="font-sans font-bold text-xl text-primary-500">{{ shop.name }}</span>
     {%- endif -%}
+  </a>
 
-    <div class="site-header__actions">
-      <a href="{{ routes.cart_url }}" class="site-header__cart" aria-label="Cart ({{ cart.item_count }} items)">
-        Cart ({{ cart.item_count }})
-      </a>
-    </div>
-  </div>
+  <!-- Review badge -->
+  {% render 'review-badge' %}
+
+  <!-- Shop Now CTA -->
+  <a href="/collections/all" class="bg-primary-500 text-white font-sans font-medium text-base px-5 py-3 rounded-pill hover:bg-primary-700 transition-colors">
+    Shop Now
+  </a>
 </header>
 
 {% schema %}
@@ -42,22 +31,6 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo image"
-    },
-    {
-      "type": "range",
-      "id": "logo_width",
-      "min": 50,
-      "max": 300,
-      "step": 10,
-      "default": 140,
-      "unit": "px",
-      "label": "Logo width"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "default": "main-menu",
-      "label": "Navigation menu"
     }
   ]
 }

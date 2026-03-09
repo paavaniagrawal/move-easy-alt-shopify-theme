@@ -1,1 +1,13 @@
-/* Base stylesheet — add global styles here */
+/* Base stylesheet — Move Easy Shopify Theme */
+
+/* Ensure Tailwind's font-sans / font-serif resolve to the loaded Google Fonts.
+   These supplement the Tailwind CDN config in theme.liquid. */
+body, .font-sans { font-family: 'DM Sans', sans-serif; }
+.font-serif       { font-family: 'Lora', serif; }
+
+/* ─── Smooth scroll ─── */
+html { scroll-behavior: smooth; }
+
+/* ─── Image gallery transition ─── */
+#product-main-image { transition: opacity 0.2s ease; }
+#product-main-image.loading { opacity: 0; }

@@ -1,9 +1,16 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "landing-content": {
+      "type": "landing-content",
+      "settings": {}
+    },
+    "landing-faq": {
+      "type": "landing-faq",
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "landing-content",
+    "landing-faq"
+  ]
 }
