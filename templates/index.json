@@ -1,11 +1,14 @@
 {
+  "layout": "theme",
   "sections": {
     "landing-content": {
       "type": "landing-content",
+      "disabled": false,
       "settings": {}
     },
     "landing-faq": {
       "type": "landing-faq",
+      "disabled": false,
       "settings": {}
     }
   },
