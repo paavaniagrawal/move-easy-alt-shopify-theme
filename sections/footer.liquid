@@ -1,0 +1,41 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    {%- if section.settings.menu != blank -%}
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        {%- for link in linklists[section.settings.menu].links -%}
+          <a href="{{ link.url }}" class="site-footer__nav-link">{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
+    {%- if section.settings.footer_text != blank -%}
+      <div class="site-footer__text rte">
+        {{ section.settings.footer_text }}
+      </div>
+    {%- endif -%}
+
+    <p class="site-footer__copyright">
+      &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}
+    </p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "footer",
+      "label": "Navigation menu"
+    },
+    {
+      "type": "richtext",
+      "id": "footer_text",
+      "label": "Footer text"
+    }
+  ]
+}
+{% endschema %}

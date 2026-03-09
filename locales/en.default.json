@@ -1,0 +1,46 @@
+{
+  "general": {
+    "title": "Lightyears Health",
+    "skip_content": "Skip to content"
+  },
+  "sections": {
+    "header": {
+      "title": "Header"
+    },
+    "footer": {
+      "title": "Footer"
+    },
+    "main_page": {
+      "title": "Page"
+    }
+  },
+  "templates": {
+    "page": {
+      "title": "Page"
+    },
+    "index": {
+      "title": "Home"
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "items_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "open_menu": "Open navigation menu",
+    "close_menu": "Close navigation menu"
+  }
+}

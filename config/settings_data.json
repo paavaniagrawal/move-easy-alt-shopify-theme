@@ -1,0 +1,14 @@
+{
+  "current": {
+    "color_primary": "#1b61bb",
+    "color_text": "#323334",
+    "color_background": "#fdfdfc",
+    "color_button": "#1b61bb",
+    "color_button_text": "#ffffff",
+    "font_heading": "lora_n4",
+    "font_body": "dm_sans_n4",
+    "page_width": 1440,
+    "spacing_sections": 40
+  },
+  "presets": {}
+}
